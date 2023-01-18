@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20230113 18:17:58.523" rpa="false" schemaversion="3">
+<suite id="s1" name="TestCasesAPIBooks" source="C:\Robot\Udm\BooksAPI\TestCasesAPIBooks.robot">
+<kw name="Conectar a minha API" library="ResourceAPI" type="SETUP">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>fakeAPI</arg>
+<arg>${URL_API}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230113 18:17:58.680" level="INFO">Creating Session using : alias=fakeAPI, url=https://fakerestapi.azurewebsites.net/api/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230113 18:17:58.680" endtime="20230113 18:17:58.680"/>
+</kw>
+<status status="PASS" starttime="20230113 18:17:58.679" endtime="20230113 18:17:58.681"/>
+</kw>
+<test id="s1-t1" name="Buscar a listagem de todos os livros (GET em todos os livros)" line="7">
+<kw name="Requisitar todos os livros" library="ResourceAPI">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${RESPOSTA}</var>
+<arg>fakeAPI</arg>
+<arg>Books</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230113 18:17:59.652" level="INFO">GET Request : url=https://fakerestapi.azurewebsites.net/api/Books 
+ path_url=/api/Books 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230113 18:17:59.652" level="INFO">GET Response : url=https://fakerestapi.azurewebsites.net/api/Books 
+ status=404, reason=Not Found 
+ headers={'Content-Length': '0', 'Date': 'Fri, 13 Jan 2023 21:18:00 GMT', 'Server': 'Kestrel'} 
+ body=None 
+ </msg>
+<msg timestamp="20230113 18:17:59.652" level="INFO">C:\Python311\Lib\site-packages\urllib3\connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakerestapi.azurewebsites.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20230113 18:17:59.654" level="FAIL">HTTPError: 404 Client Error: Not Found for url: https://fakerestapi.azurewebsites.net/api/Books</msg>
+<status status="FAIL" starttime="20230113 18:17:58.682" endtime="20230113 18:17:59.658"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${RESPOSTA.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230113 18:17:59.658" endtime="20230113 18:17:59.659"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${RESPOSTA}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" starttime="20230113 18:17:59.659" endtime="20230113 18:17:59.659"/>
+</kw>
+<status status="FAIL" starttime="20230113 18:17:58.681" endtime="20230113 18:17:59.659"/>
+</kw>
+<kw name="Conferir o status code" library="ResourceAPI">
+<arg>200</arg>
+<status status="NOT RUN" starttime="20230113 18:17:59.660" endtime="20230113 18:17:59.661"/>
+</kw>
+<kw name="Conferir o reason" library="ResourceAPI">
+<arg>OK</arg>
+<status status="NOT RUN" starttime="20230113 18:17:59.661" endtime="20230113 18:17:59.662"/>
+</kw>
+<kw name="Conferir se retorna uma lista com &quot;200&quot; livros" library="ResourceAPI" sourcename="Conferir se retorna uma lista com &quot;${QTDE_LIVROS}&quot; livros">
+<status status="NOT RUN" starttime="20230113 18:17:59.662" endtime="20230113 18:17:59.662"/>
+</kw>
+<status status="FAIL" starttime="20230113 18:17:58.681" endtime="20230113 18:17:59.663">HTTPError: 404 Client Error: Not Found for url: https://fakerestapi.azurewebsites.net/api/Books</status>
+</test>
+<test id="s1-t2" name="Buscar um livro específico (GET em um livro específico)" line="12">
+<kw name="Requisitar o livro &quot;15&quot;" library="ResourceAPI" sourcename="Requisitar o livro &quot;${ID_LIVRO}&quot;">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${RESPOSTA}</var>
+<arg>fakeAPI</arg>
+<arg>Books/${ID_LIVRO}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230113 18:17:59.866" level="INFO">GET Request : url=https://fakerestapi.azurewebsites.net/api/Books/15 
+ path_url=/api/Books/15 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230113 18:17:59.866" level="INFO">GET Response : url=https://fakerestapi.azurewebsites.net/api/Books/15 
+ status=404, reason=Not Found 
+ headers={'Content-Length': '0', 'Date': 'Fri, 13 Jan 2023 21:18:00 GMT', 'Server': 'Kestrel'} 
+ body=None 
+ </msg>
+<msg timestamp="20230113 18:17:59.866" level="INFO">C:\Python311\Lib\site-packages\urllib3\connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakerestapi.azurewebsites.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20230113 18:17:59.867" level="FAIL">HTTPError: 404 Client Error: Not Found for url: https://fakerestapi.azurewebsites.net/api/Books/15</msg>
+<status status="FAIL" starttime="20230113 18:17:59.668" endtime="20230113 18:17:59.869"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${RESPOSTA.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230113 18:17:59.869" endtime="20230113 18:17:59.869"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${RESPOSTA}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" starttime="20230113 18:17:59.869" endtime="20230113 18:17:59.870"/>
+</kw>
+<status status="FAIL" starttime="20230113 18:17:59.667" endtime="20230113 18:17:59.870"/>
+</kw>
+<kw name="Conferir o status code" library="ResourceAPI">
+<arg>200</arg>
+<status status="NOT RUN" starttime="20230113 18:17:59.871" endtime="20230113 18:17:59.871"/>
+</kw>
+<kw name="Conferir o reason" library="ResourceAPI">
+<arg>OK</arg>
+<status status="NOT RUN" starttime="20230113 18:17:59.871" endtime="20230113 18:17:59.872"/>
+</kw>
+<kw name="Conferir se retorna todos os dados corretos do livro 15" library="ResourceAPI">
+<status status="NOT RUN" starttime="20230113 18:17:59.872" endtime="20230113 18:17:59.872"/>
+</kw>
+<status status="FAIL" starttime="20230113 18:17:59.666" endtime="20230113 18:17:59.873">HTTPError: 404 Client Error: Not Found for url: https://fakerestapi.azurewebsites.net/api/Books/15</status>
+</test>
+<doc>Documentação da API: https://fakerestapi.azurewebsites.net/index.html</doc>
+<status status="FAIL" starttime="20230113 18:17:58.525" endtime="20230113 18:17:59.876"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="2" skip="0" id="s1" name="TestCasesAPIBooks">TestCasesAPIBooks</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
